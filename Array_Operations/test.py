@@ -1,3 +1,6 @@
-arr = [1, 2, 3, 4, 5]
-for i in reversed(range(len(arr))):
-    print(i)
+arr = [1,1,4,2,1,3]
+'''for i in reversed(range(len(arr))):
+    print(i)'''
+
+sorted_arr = arr.sort()
+print(sorted_arr)
