@@ -1,21 +1,21 @@
 class Solution(object):
     def make_unique(self, nums):
         write_pointer = 0
-        nums1 = []
-        for read_pointer in range(0, len(nums)):
-            if nums[read_pointer] != nums1[write_pointer]:
-                nums1[write_pointer] = nums[read_pointer]
+        for read_pointer in range(len(nums)):
+            if nums[read_pointer] != nums[write_pointer]:
                 write_pointer = write_pointer + 1
-        return nums1
+                nums[write_pointer] = nums[read_pointer]
+        slice_object = slice(write_pointer+1)
+        return nums[slice_object]
     
     def thirdMax(self, nums):
-        nums1 = self.make_unique(nums)
-        nums1.sort()
-        if len(nums1) >= 3:
-            return nums1[2]
+        nums.sort()
+        nums = self.make_unique(nums)
+        if len(nums)>=3:
+            return nums[-3]
         else:
-            return nums1[len(nums1)-1]
+            return max(nums)
 
 S = Solution()
-nums = [2,2,3,1]
+nums = [1,2,2,5,3,5]
 print(S.thirdMax(nums))
