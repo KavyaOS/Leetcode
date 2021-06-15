@@ -11,7 +11,7 @@ class Solution(object):
         i = 0
         if counter is None:
             return None
-        while i!=counter:
+        while i!=counter-1:
             head = head.next_node
             i = i + 1
         return head
@@ -37,7 +37,7 @@ element_node3 = ListNode(-4)
 head_node.next_node = element_node1
 element_node1.next_node = element_node2
 element_node2.next_node = element_node3
-#SWWelement_node3.next_node = element_node1
+#element_node3.next_node = element_node1
 
 S = Solution()
 print(S.hasCycle(head_node))
