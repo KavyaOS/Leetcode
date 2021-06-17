@@ -28,6 +28,7 @@ class MyLinkedList(object):
     def addAtHead(self, val):
         node = ListNode(val)
         node.next_node = self.head
+        self.head = node
         """
         Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
         :type val: int
@@ -60,6 +61,7 @@ class MyLinkedList(object):
                 break
             else:
                 iterator = iterator.next_node
+                counter = counter + 1
 
         """
         Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
@@ -94,6 +96,10 @@ element_node2.next_node = element_node3
 #element_node3.next_node = element_node1
 
 my_list = MyLinkedList(head_node)
-print(my_list.get(2))
+#print(my_list.get(2))
 my_list.addAtHead(5)
+#my_list.print_values()
+my_list.addAtTail(1)
+#my_list.print_values()
+my_list.addAtIndex(2, 8)
 my_list.print_values()
