@@ -1,14 +1,11 @@
-from typing import Iterator
-
-
 class ListNode(object):
     def __init__(self, data_value):
         self.data_value = data_value
         self.next_node = None
 
 class MyLinkedList(object):
-    def __init__(self, head):
-        self.head = head
+    def __init__(self):
+        self.head = None
 
     def get(self, index):
         counter = 0
@@ -39,6 +36,9 @@ class MyLinkedList(object):
     def addAtTail(self, val):
         node = ListNode(val)
         iterator = self.head
+        if self.head is None:
+            self.head = node
+            return
         while iterator.next_node is not None:
             iterator = iterator.next_node
         iterator.next_node = node
@@ -53,8 +53,15 @@ class MyLinkedList(object):
         counter = 0
         node = ListNode(val)
         iterator = self.head
+        if self.head is None:
+            self.head = node
+            return
+        if index == 0:
+            node.next_node = self.head
+            self.head = node
+            return
         while iterator is not None:
-            if counter == index:
+            if counter == index-1:
                 temp_node = iterator.next_node
                 iterator.next_node = node
                 node.next_node = temp_node
@@ -72,7 +79,20 @@ class MyLinkedList(object):
         
 
     def deleteAtIndex(self, index):
-
+        node = temp_node = self.head
+        counter = 0
+        if index == 0:
+            self.head = self.head.next_node
+            return
+        while node is not None:
+            if counter == index:
+                while temp_node.next_node != node:
+                    temp_node = temp_node.next_node
+                temp_node.next_node = node.next_node
+                break
+            else:
+                counter = counter + 1
+                node = node.next_node
         """
         Delete the index-th node in the linked list, if the index is valid.
         :type index: int
@@ -85,7 +105,7 @@ class MyLinkedList(object):
             print(node.data_value)
             node = node.next_node
 
-head_node = ListNode(3)
+'''head_node = ListNode(3)
 element_node1 = ListNode(2)
 element_node2 = ListNode(0)
 element_node3 = ListNode(-4)
@@ -93,13 +113,22 @@ element_node3 = ListNode(-4)
 head_node.next_node = element_node1
 element_node1.next_node = element_node2
 element_node2.next_node = element_node3
-#element_node3.next_node = element_node1
+#element_node3.next_node = element_node1'''
 
-my_list = MyLinkedList(head_node)
+my_list = MyLinkedList()
+#my_list.head = head_node
 #print(my_list.get(2))
-my_list.addAtHead(5)
+'''my_list.addAtHead(1)
 #my_list.print_values()
-my_list.addAtTail(1)
+my_list.addAtTail(3)
 #my_list.print_values()
-my_list.addAtIndex(2, 8)
+my_list.addAtIndex(1, 2)
+my_list.print_values()
+my_list.deleteAtIndex(0)
+#my_list.print_values()'''
+
+my_list.addAtIndex(0, 10)
+my_list.addAtIndex(0, 20)
+my_list.addAtIndex(1, 30)
+#print(my_list.get(1))
 my_list.print_values()
