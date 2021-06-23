@@ -8,6 +8,11 @@ class MyLinkedList(object):
         self.head = None
 
     def get(self, index):
+        """
+        Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+        :type index: int
+        :rtype: int
+        """
         counter = 0
         node = self.head
         while node is not None:
@@ -16,24 +21,23 @@ class MyLinkedList(object):
             node = node.next_node
             counter = counter + 1
         return -1
-        """
-        Get the value of the index-th node in the linked list. If the index is invalid, return -1.
-        :type index: int
-        :rtype: int
-        """
 
     def addAtHead(self, val):
-        node = ListNode(val)
-        node.next_node = self.head
-        self.head = node
         """
         Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
         :type val: int
         :rtype: None
         """
+        node = ListNode(val)
+        node.next_node = self.head
+        self.head = node
         
-
     def addAtTail(self, val):
+        """
+        Append a node of value val to the last element of the linked list.
+        :type val: int
+        :rtype: None
+        """
         node = ListNode(val)
         iterator = self.head
         if self.head is None:
@@ -42,14 +46,14 @@ class MyLinkedList(object):
         while iterator.next_node is not None:
             iterator = iterator.next_node
         iterator.next_node = node
+
+    def addAtIndex(self, index, val):
         """
-        Append a node of value val to the last element of the linked list.
+        Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+        :type index: int
         :type val: int
         :rtype: None
         """
-        
-
-    def addAtIndex(self, index, val):
         counter = 0
         node = ListNode(val)
         iterator = self.head
@@ -70,15 +74,12 @@ class MyLinkedList(object):
                 iterator = iterator.next_node
                 counter = counter + 1
 
+    def deleteAtIndex(self, index):
         """
-        Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+        Delete the index-th node in the linked list, if the index is valid.
         :type index: int
-        :type val: int
         :rtype: None
         """
-        
-
-    def deleteAtIndex(self, index):
         node = temp_node = self.head
         counter = 0
         if index == 0:
@@ -93,12 +94,8 @@ class MyLinkedList(object):
             else:
                 counter = counter + 1
                 node = node.next_node
-        """
-        Delete the index-th node in the linked list, if the index is valid.
-        :type index: int
-        :rtype: None
-        """
     
+    '''method below is just for testing purpose'''
     def print_values(self):
         node = self.head
         while node is not None:
