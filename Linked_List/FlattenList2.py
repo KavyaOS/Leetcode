@@ -7,6 +7,7 @@ class ListNode(object):
 
 class Solution(object):
     def flatten(self, head):
+        '''Worst case Complexity: Space: O(N), Time: O(N)'''
         head_copy = head
         save = []
         save.append(head)
