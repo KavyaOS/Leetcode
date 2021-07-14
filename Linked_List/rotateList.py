@@ -4,28 +4,24 @@ class ListNode(object):
         self.next = None
 
 class Solution(object):
-    '''Worst case Complexities: Space: O(1), time: O(N*k) '''
+    '''Worst case Complexities: Space: O(1), time: O(N) '''
     def rotateRight(self, head, k):
-        if k==0 or head is None or head.next is None:
+        if head is None or k is 0 or head.next is None:
             return head
-        last_but_one = curr = head
-        while curr.next.next is not None:
-            curr = curr.next
-            last_but_one = curr
-        last_node = curr.next
-        last_node.next = head
-        head = last_node
-        last_but_one.next = None
-        k = k % self.get_list_length(head)
-        return self.rotateRight(head, k-1)
-
-    def get_list_length(self, list):
-        counter = 0
-        while list is not None:
+        curr = head
+        counter = 1
+        while curr.next is not None:
             counter = counter + 1
-            list = list.next
-        return counter
-
+            curr = curr.next
+        curr.next = head
+        k = counter - (k%counter)
+        while k!=0:
+            curr = curr.next
+            k = k-1
+        new_head = curr.next
+        curr.next = None
+        return new_head
+        
     ''' This method is just for testing '''
     def print_values(self, node):
         while node is not None:
@@ -50,5 +46,5 @@ head_node2.next = element_node
 element_node.next = element_node4
 
 S = Solution()
-node = S.rotateRight(head_node2, 0)
+node = S.rotateRight(head_node1, 2)
 S.print_values(node)
