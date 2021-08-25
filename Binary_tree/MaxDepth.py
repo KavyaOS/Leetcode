@@ -5,8 +5,7 @@ class Node:
         self.right = None
 
 class Solution:
-    '''Worst case complexities: Space: O(N), where N being the number of nodes in the given tree.
-     Time: O(M*N), where M being number of levels of a tree, N being maximum number of nodes in a certain level'''
+    '''Worst case complexities: Space: O(1), Time: O(h), where h being the max depth of the given binary tree'''
     def maxDepth(self, root):
         if root is None:
             return 0
