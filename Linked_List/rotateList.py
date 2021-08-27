@@ -6,7 +6,7 @@ class ListNode(object):
 class Solution(object):
     '''Worst case Complexities: Space: O(1), time: O(N) '''
     def rotateRight(self, head, k):
-        if head is None or k is 0 or head.next is None:
+        if head is None or k == 0 or head.next is None:
             return head
         curr = head
         counter = 1
