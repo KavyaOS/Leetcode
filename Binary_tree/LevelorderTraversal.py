@@ -5,10 +5,10 @@ class Node:
         self.right = None
 
 class Solution:
-    '''Worst case complexities: 
+    def recursive_levelOrder(self, root):
+        '''Worst case complexities: 
         Space (To hold result): O(l*n), where l being the number of levels of a binary tree and n being the number of nodes at a certain level
         Time: O(2^l) or O(n), since in worst case n can go upto 2^l'''
-    def levelOrder(self, root):
         if root is None:
             return root
         result = []
@@ -24,6 +24,29 @@ class Solution:
         helper_traversal(0, root)
         return result
 
+    def iterative_levelorder(self, root):
+        '''SC: O(l*n), TC: O(l*n)'''
+        if root is None:
+            return root
+        result = []
+        result.append([root.val])
+        curr_layer = []
+        curr_layer.append(root)
+        while curr_layer:
+            new_layer = []
+            new_level = []
+            for node in curr_layer:
+                if node.left:
+                    new_layer.append(node.left)
+                    new_level.append(node.left.val)
+                if node.right:
+                    new_layer.append(node.right)
+                    new_level.append(node.right.val)
+            if new_level:
+                result.append(new_level)
+            curr_layer = new_layer
+        return result
+
 tree = Node(3)
 child1 = Node(9)
 child2 = Node(20)
@@ -36,4 +59,5 @@ child2.left = child3
 child2.right = child4
 
 S = Solution()
-print(S.levelOrder(tree))
+print(S.recursive_levelOrder(tree))
+print(S.iterative_levelorder(tree))
