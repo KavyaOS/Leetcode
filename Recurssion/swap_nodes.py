@@ -4,7 +4,8 @@ class ListNode(object):
         self.next = None
 
 class Solution(object):
-    def swapPairs(self, head):
+    '''Both recursive and iterative solution takes O(1) space and O(n) time'''
+    def swapPairs_iterative(self, head):
         if head is None:
             return head
         node = head
@@ -19,6 +20,25 @@ class Solution(object):
             node.next = temp
             node = node.next
         return head
+
+    def swapPairs_recursive(self, head):
+        if head is None or head.next is None:
+            return head
+        if head.next:
+            new_head = head.next
+        self.recurse(head, None)
+        return new_head
+
+    def recurse(self, node, prev):
+        if node is None or node.next is None:
+            return node
+        if prev: prev.next = node.next
+        temp = node.next.next
+        node.next.next = node
+        prev = node
+        node.next = temp
+        return self.recurse(node.next, prev)
+
     
     ''' This method is just for testing '''
     def print_values(self, node):
@@ -38,5 +58,5 @@ element_node2.next = element_node3
 element_node3.next = element_node4
 
 S = Solution()
-new_head = S.swapPairs(head_node1)
+new_head = S.swapPairs_recursive(head_node1)
 S.print_values(new_head)
