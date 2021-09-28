@@ -23,6 +23,6 @@ class Solution(object):
         if B: return self.majorityElement(B)
         else: return None
 
-nums = [2, 2, 3]
+nums = [1, 2, 4, 5, 3, 3]
 S = Solution()
 print(S.majorityElement(nums))
