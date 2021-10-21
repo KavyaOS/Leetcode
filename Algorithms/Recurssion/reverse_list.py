@@ -18,6 +18,26 @@ class Solution(object):
             next_to_ref = ref_node.next
         return head
 
+    def reverseList_recursive(self, head):
+        if head is None or head.next is None:
+            return head
+        ref_node = head
+        next_to_ref = ref_node.next
+        return self.reverse(head, ref_node, next_to_ref)
+
+    def reverse(self, head, ref_node, next_to_ref):
+        if next_to_ref is None:
+            return head
+
+        temp = next_to_ref.next
+        next_to_ref.next = head
+        ref_node.next = temp
+        head = next_to_ref
+        next_to_ref = ref_node.next
+        self.reverse(head, ref_node, ref_node.next)
+        
+        return head
+
     ''' This method is just for testing '''
     def print_values(self, node):
         while node is not None:
@@ -36,5 +56,5 @@ element_node2.next = element_node3
 element_node3.next = element_node4
 
 S = Solution()
-node = S.reverseList(head_node1)
+node = S.reverseList_recursive(head_node1)
 S.print_values(node)
