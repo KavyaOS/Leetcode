@@ -9,10 +9,10 @@ class queue:
     def dequeue(self):
         return self.container.pop(0)
 
-q = queue(10)
+# # q = queue(10)
 
-q.insert(20)
-q.insert(40)
+# # q.insert(20)
+# # q.insert(40)
 
-print(q.dequeue())
-print(q.dequeue())
+# print(q.dequeue())
+# print(q.dequeue())
