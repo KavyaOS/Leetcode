@@ -1,24 +1,20 @@
+import numpy as np
 class Solution(object):
     def longestPalindromeSubseq(self, s):
-        if len(s)==1: return 1
-        T = [[0]*(len(s)+1)]*(len(s)+1)
-        for i in range((len(s))):
-            T[i][i] = 1
-            for j in range((len(s))):
-                if i>j:
-                    T[i][j] = 0
-
-        for i in range(1,len(s)):
-            for j in reversed(range((len(s)-i+1))):
-                if s[i] == s[j]:
-                    T[i][j] = max(2 + T[i+1][j-1] , T[i+1][j], T[i][j-1])
+        rows = cols = string_length = len(s)
+        DP = np.zeros((string_length, string_length))
+        for row in range(rows):
+            DP[row][row] = 1
+        for substring_length in range(2, len(s)+1):
+            for row in range(0, string_length - substring_length + 1):
+                col = row + substring_length - 1
+                if s[row] == s[col]:
+                    if string_length==2:
+                        DP[row][col] = 2
+                    else:
+                        DP[row][col] = 2 + DP[row+1][col-1]
                 else:
-                    T[i][j] = max(T[i+1][j], T[i][j-1])
-        return T[1][len(s)]
-
-        """
-        :type s: str
-        :rtype: int
-        """
+                    DP[row][col] = max(DP[row+1][col], DP[row][col-1])
+        return DP[0][-1]
 
 print(Solution().longestPalindromeSubseq("cac"))
