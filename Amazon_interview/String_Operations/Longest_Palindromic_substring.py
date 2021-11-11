@@ -1,20 +1,36 @@
-'''Naive Approach'''
-class Solution(object):
-    def is_palindrome(self, s, start, stop):
-        if start==stop: return True
-        substring = s[start:stop+1]
-        reversed_string = substring[::-1]
-        if substring==reversed_string:
-            return True
-        return False
-            
+'''https://leetcode.com/problems/longest-palindromic-substring/'''
+import numpy as np
+class Solution(object):        
     def longestPalindrome(self, s):
-        left = right = 0
+        DP = np.zeros((len(s), len(s)))
+        max_len = 1
         result = ""
-        if len(s)==1: return s
-        for left in range(len(s)):
-            for right in range(left, len(s)+1):
-                if self.is_palindrome(s, left, right):
-                    if right-left >= len(result):
-                        result = s[left:right+1]
-        return result
+        start = end = 0
+        string_length = rows = cols = len(s)
+        for row in range(rows):
+            DP[row][row] = 1
+            col = row + 1
+            if col<cols:
+                if s[row]==s[col]:
+                    DP[row][col] = 1
+                    start = row
+                    end = col
+                else: DP[row][col] = 0
+
+        for k in range(2, len(s)):
+            for row in range(rows-k):
+                col = row + k
+                #print(row, col)
+                if s[row] == s[col] and int(DP[row+1][col-1])==1:
+                        DP[row][col] = 1
+                        if col-row >= max_len:
+                            start = row
+                            end = col
+
+                else:
+                    DP[row][col] = 0
+                
+        return s[start:end+1]
+
+print(Solution().longestPalindrome("aaaabbaa"))
+#print(Solution().longestPalindrome("cbbd"))
