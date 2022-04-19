@@ -10,7 +10,7 @@ class Solution(object):
         arr[len(arr)-1] = -1'''
         max = arr[len(arr)-1]
         arr[len(arr)-1] = -1
-        for i in reversed(range(1, len(arr)-1)):
+        for i in reversed(range(len(arr)-1)):
             temp = arr[i]
             arr[i] = max
             if temp > max:
